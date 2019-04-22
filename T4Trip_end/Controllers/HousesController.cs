@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using T4Trip_end.Models;
+using T4Trip_end.ViewModels;
+
 
 namespace T4Trip_end.Controllers
 {
@@ -17,8 +19,25 @@ namespace T4Trip_end.Controllers
         // GET: Houses
         public ActionResult Index()
         {
-            var houses = db.Houses.Include(h => h.Location);
+            var houses = db.Houses.Include(h => h.Location).Include(xxx=>xxx.Reservations);
             return View(houses.ToList());
+        }
+
+        public ActionResult mazi()
+        {
+        
+            //List<House> housesList = db.Houses.ToList();
+            // var housesViewModelList = housesList.Select(x => new HouseReservationViewModel { House = x, Reservations1 = x.Reservations }).ToList();
+            var housesList = db.Houses.Include(c => c.Location).Include(y => y.Reservations).Where(xs=>xs.Id.Equals(1)).ToList();
+            var ReservationsList = db.Reservations.ToList();
+            HouseReservationViewModel ViewModel = new HouseReservationViewModel
+            {
+                House = housesList.First(),
+                Reservations1 = ReservationsList
+
+
+            };        
+            return View(ViewModel);
         }
 
         // GET: Houses/Details/5

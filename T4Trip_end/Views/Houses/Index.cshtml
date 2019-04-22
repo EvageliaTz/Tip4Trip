@@ -32,6 +32,9 @@
         <th>
             @Html.DisplayNameFor(model => model.PriceperNight)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservations)
+        </th>
         <th></th>
     </tr>
 
@@ -58,10 +61,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.PriceperNight)
         </td>
+        <td>@Html.DisplayFor(modelItem => item.Reservations.Count)</td>
+        <td></td>
+            
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
