@@ -13,11 +13,19 @@ namespace T4Trip_end.Controllers
         private T4TContext db = new T4TContext();
 
         public ActionResult Index(string searching , string Address)
+       
         {
+            
             return View(db.Houses.Include(mmn => mmn.Location).Where(x => x.Location.NameCity.Contains(searching) && x.Address.Contains(Address) || searching == null).ToList());
 
-            //return View();
+           
         }
+
+        //public ActionResult QueryView()
+        //{
+        //    var query = db.Reservations.SqlQuery("SELECT * FROM Houses INNER JOIN Locations ON Locations.Id = Houses.LocationId INNER JOIN Reservations ON Reservations.HouseId = Houses.Id; ").ToList();
+        //    return View(query);
+        //}
 
         public ActionResult About()
         {

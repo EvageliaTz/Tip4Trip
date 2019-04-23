@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<T4Trip_end.Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Viewz", "Reservations", FormMethod.Get))
+{
+
+    // @Html.TextBox("StartDateSearch", null, new { @class = "form-control", @placeholder = "Start Date" })
+    // @Html.TextBox("StartDateSearch", null, new { @type = "date", @class = "form-control datepicker", @placeholder = "Start Date" })
+    // @Html.TextBox("EndDateSearch", null, new { @type = "date", @class = "form-control datepicker", @placeholder = "End Date" })
+    @Html.TextBox("StartDateSearch", null, new { @type = "date", @class = "form-control", id = "StartDateSearch", @placeholder = "Start Date" })
+    @Html.TextBox("EndDateSearch", null, new { @type = "date", @class = "form-control", id = "EndDateSearch", @placeholder = "End Date" })
+
+    //@Html.TextBox("EndDateSearch", null, new { @class = "form-control", @placeholder = "End Date" })
+
+
+    <input type="submit" value="T4Trip Search" />
+}
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>House ID</th>
+            <th>Booking!</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No match
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td>@item.HouseId</td>
+                    <td>@Html.ActionLink("Book me!", "Create", new { id = item.HouseId })</td>
+
+
+
+
+
+
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@{
+    ViewBag.Title = "View";
+}

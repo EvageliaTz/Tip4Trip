@@ -17,8 +17,20 @@ namespace T4Trip_end.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
-            var reservations = db.Reservations.Include(r => r.HouseRes);
-            return View(reservations.ToList());
+           
+             var reservations = db.Reservations.Include(r => r.HouseRes);
+             return View(reservations.ToList());
+
+        }
+
+        public ActionResult Viewz(DateTime? StartDateSearch, DateTime? EndDateSearch)
+        {
+
+           //return View(db.Reservations.Where(x => x.StartDate >= StartDateSearch && x.EndDate <= EndDateSearch || StartDateSearch == null || EndDateSearch == null).ToList());
+            return View(db.Reservations.Where(x => x.EndDate < StartDateSearch || x.StartDate > EndDateSearch || StartDateSearch == null || EndDateSearch == null).ToList());
+            //var reservations = db.Reservations.Include(r => r.HouseRes);
+            //return View(reservations.ToList());
+
         }
 
         // GET: Reservations/Details/5

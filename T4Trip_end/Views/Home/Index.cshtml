@@ -4,7 +4,7 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
 
-    @Html.TextBox("searching",  null, new { @class = "form-control", @placeholder = "Search With Location Name" })
+    @Html.TextBox("searching", null, new { @class = "form-control", @placeholder = "Search With Location Name" })
     @Html.TextBox("Address", null, new { @class = "form-control", @placeholder = "Search With Address" })
 
     <input type="submit" value="T4Trip Search" />
@@ -16,6 +16,7 @@
             <th>House Location</th>
             <th>House Address</th>
             <th>House Dates</th>
+
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,13 @@
                     <td>@item.Location.NameCity</td>
                     <td>@item.Address </td>
                     <td>@item.Description</td>
+
+
+
+
+
+
+
                 </tr>
             }
         }

@@ -19,11 +19,22 @@ namespace T4Trip_end.Models
 
         public Location Location { get; set; }
 
+
         [Display(Name = "Location")]
         [Required]
         public int LocationId { get; set; }
+
+        //public Reservation Reservation { get; set; }
+        //[Display(Name = "StartDate")]
+        //[Required]
+        //public int ReservationId { get; set; }
+
+
+
         string image;
         public int MaxOccupancy { get; set; }
         public int PriceperNight { get; set; }
+
+        //public virtual Reservation Reservation { get; set; }
     }
 }

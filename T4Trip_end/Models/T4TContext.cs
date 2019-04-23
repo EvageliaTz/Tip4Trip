@@ -11,7 +11,7 @@ namespace T4Trip_end.Models
     {
 
 
-        const string connectionString = @"Data Source=MUNTAN-PC\SQLEXPRESS;Initial Catalog=T4Trip_End;Integrated Security=True";
+        const string connectionString = @"Data Source=DESKTOP-HN2KI80\SQLEXPRESS;Initial Catalog=T4Trip_End;Integrated Security=True";
         public T4TContext() : base(connectionString) { }
 
         public DbSet<House> Houses { get; set; }
