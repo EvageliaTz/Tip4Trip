@@ -23,21 +23,27 @@ namespace T4Trip_end.Controllers
             return View(houses.ToList());
         }
 
-        public ActionResult mazi()
+        public ActionResult mazi(int idilicious)
         {
         
             //List<House> housesList = db.Houses.ToList();
             // var housesViewModelList = housesList.Select(x => new HouseReservationViewModel { House = x, Reservations1 = x.Reservations }).ToList();
-            var housesList = db.Houses.Include(c => c.Location).Include(y => y.Reservations).Where(xs=>xs.Id.Equals(1)).ToList();
+            var housesList = db.Houses.Include(c => c.Location).Include(y => y.Reservations).Where(xs=>xs.Id.Equals(idilicious)).ToList();
             var ReservationsList = db.Reservations.ToList();
-            HouseReservationViewModel ViewModel = new HouseReservationViewModel
+            if (idilicious > 0 && idilicious <= ReservationsList.Count())
             {
-                House = housesList.First(),
+                HouseReservationViewModel ViewModel = new HouseReservationViewModel
+            {
+                House = housesList.Last(),
                 Reservations1 = ReservationsList
 
 
-            };        
-            return View(ViewModel);
+            };
+            
+                return View(ViewModel);
+            }
+            else
+            { return Content("Wrong Id , Try again"); }
         }
 
         // GET: Houses/Details/5

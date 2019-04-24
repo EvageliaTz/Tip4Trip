@@ -50,11 +50,27 @@ namespace T4Trip_end.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,HouseId,renter,StartDate,EndDate,Occupants,DateOfBooking,CustommerComments,PricePerNightCharged")] Reservation reservation)
         {
+            int i = 1;
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (reservation.EndDate > reservation.StartDate)
+                {
+                    foreach (Reservation item in db.Reservations.Where(x => x.HouseId == reservation.HouseId))
+                    {
+                        if ((reservation.StartDate >= item.StartDate && reservation.StartDate < item.EndDate) || (reservation.EndDate > item.StartDate && reservation.EndDate <= item.EndDate))
+                        {
+                            return Content(" The Dates You want to rent the House are allready closed , Sorry ! Please check the list and try again ");
+                        }
+
+                    } 
+                            db.Reservations.Add(reservation);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        
+                    
+                }
+                else
+                { return Content("End Date must be later Than Start Date ! "); }//RedirectToAction("Create");
             }
 
             ViewBag.HouseId = new SelectList(db.Houses, "Id", "Title", reservation.HouseId);
